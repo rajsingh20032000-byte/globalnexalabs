@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Set EJS view engine and absolute views path for Hostinger
+// Set EJS as view engine and use absolute path for views directory
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -14,13 +14,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('index', { 
-    title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
-  });
+  try {
+    res.render('index', { 
+      title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
+    });
+  } catch (err) {
+    console.error("View rendering error:", err);
+    res.status(500).send(`<h3>Rendering Error:</h3><pre>${err.message}</pre>`);
+  }
 });
 
 app.post('/contact', (req, res) => {
-  const { name, email, message }  = req.body;
+  const { name, email, message } = req.body;
   console.log(`Inquiry from ${name} (${email}): ${message}`);
   res.send(`
     <body style="background:#020617; color:#fff; font-family:sans-serif; text-align:center; padding-top:100px;">
