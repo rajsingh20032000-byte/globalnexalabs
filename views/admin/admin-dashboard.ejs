@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #020617; color: #F8FAFC; display: flex; min-height: 100vh; }
+        
+        /* Sidebar Styling */
+        sidebar { width: 280px; background: #0F172A; border-right: 1px solid #1E293B; display: flex; flex-direction: column; padding: 2rem 1.5rem; }
+        .logo { font-size: 1.3rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 4px; margin-bottom: 2.5rem; padding-left: 0.5rem; }
+        .logo span { color: #0F9B58; }
+        
+        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
+        .nav-menu a { color: #94A3B8; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; padding: 0.75rem 1rem; border-radius: 10px; transition: all 0.2s; }
+        .nav-menu a:hover { background: rgba(15, 155, 88, 0.1); color: #0F9B58; }
+        .nav-menu a.active { background: rgba(15, 155, 88, 0.15); color: #0F9B58; }
+        
+        /* Submenu Styling */
+        .submenu-title { font-size: 0.75rem; text-transform: uppercase; color: #64748B; font-weight: 700; letter-spacing: 1px; margin: 1.5rem 0 0.5rem 1rem; }
+        .submenu { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; padding-left: 1rem; border-left: 2px solid #1E293B; margin-left: 1rem; }
+        .submenu a { color: #94A3B8; font-size: 0.9rem; padding: 0.5rem 0.75rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
+        .submenu a:hover { color: #0F9B58; background: rgba(15, 155, 88, 0.08); }
+        .submenu a.sub-active { color: #0F9B58; background: rgba(15, 155, 88, 0.12); font-weight: 700; }
+        
+        .logout-btn { color: #FF3B30 !important; margin-top: auto; }
+        .logout-btn:hover { background: rgba(255, 59, 48, 0.1) !important; }
+
+        /* Main Content Styling */
+        .main-content { flex-grow: 1; padding: 3rem; overflow-x: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+        .header h1 { font-size: 1.8rem; font-weight: 800; }
+        
+        /* Cards Grid Layout */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .stat-card { background: #0F172A; border: 1px solid #1E293B; padding: 1.8rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 1.2rem; transition: transform 0.2s, border-color 0.2s; }
+        .stat-card:hover { transform: translateY(-3px); border-color: rgba(15, 155, 88, 0.4); }
+        .stat-icon { width: 55px; height: 55px; border-radius: 12px; background: rgba(15, 155, 88, 0.12); color: #0F9B58; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .stat-info h4 { color: #94A3B8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
+        .stat-info .number { color: #fff; font-size: 1.8rem; font-weight: 800; }
+
+        .content-box { background: #0F172A; border: 1px solid #1E293B; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .content-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .empty-text { color: #64748B; font-size: 0.95rem; text-align: center; padding: 3rem; }
+        
+        table { width: 100%; border-collapse: collapse; text-align: left; margin-top: 1rem; }
+        th { padding: 12px; border-bottom: 1px solid #1E293B; color: #94A3B8; font-size: 0.85rem; font-weight: 600; }
+        td { padding: 14px 12px; border-bottom: 1px solid #1E293B; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <% const currentTab = typeof activeTab !== 'undefined' ? activeTab : 'overview'; %>
+    <% const dashboardStats = typeof stats !== 'undefined' ? stats : { totalCustomers: 0, totalPartners: 0, totalCategories: 4, totalSubCategories: 12 }; %>
+
+    <sidebar>
+        <a href="/admin/dashboard?tab=overview" class="logo">Global<span>Nexa</span> Admin</a>
+        
+        <ul class="nav-menu">
+            <li><a href="/admin/dashboard?tab=overview" class="<%= currentTab === 'overview' ? 'active' : '' %>"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+            
+            <!-- Dedicated NEED App Menu Section -->
+            <div class="submenu-title">NEED Super App</div>
+            <ul class="submenu">
+                <li><a href="/admin/dashboard?tab=customers" class="<%= currentTab === 'customers' ? 'sub-active' : '' %>"><i class="fa-solid fa-users"></i> Customers</a></li>
+                <li><a href="/admin/dashboard?tab=partners" class="<%= currentTab === 'partners' ? 'sub-active' : '' %>"><i class="fa-solid fa-handshake"></i> Service Partners</a></li>
+                <li><a href="/admin/dashboard?tab=inquiries" class="<%= currentTab === 'inquiries' ? 'sub-active' : '' %>"><i class="fa-solid fa-envelope-open-text"></i> Inquiries</a></li>
+            </ul>
+
+            <div class="submenu-title" style="margin-top: 1.5rem;">System</div>
+            <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+            <li><a href="/admin/logout" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </sidebar>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>NEED Super App Control Center</h1>
+            <p style="color: #94A3B8; font-size: 0.9rem;"><i class="fa-solid fa-circle" style="color: #0F9B58; font-size: 8px; margin-right: 6px;"></i> Firebase Live Connected</p>
+        </div>
+
+        <!-- 📊 DESIGNED METRICS OVERVIEW CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <h4>Total Customers</h4>
+                    <div class="number"><%= dashboardStats.totalCustomers %></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(59, 130, 246, 0.12); color: #3B82F6;"><i class="fa-solid fa-handshake"></i></div>
+                <div class="stat-info">
+                    <h4>Total Partners</h4>
+                    <div class="number"><%= dashboardStats.totalPartners %></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(245, 158, 11, 0.12); color: #F59E0B;"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="stat-info">
+                    <h4>Total Categories</h4>
+                    <div class="number"><%= dashboardStats.totalCategories %></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: rgba(168, 85, 247, 0.12); color: #A855F7;"><i class="fa-solid fa-sitemap"></i></div>
+                <div class="stat-info">
+                    <h4>Sub-Categories</h4>
+                    <div class="number"><%= dashboardStats.totalSubCategories %></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DYNAMIC CONTENT AREA BASED ON ACTIVE TAB -->
+        <div class="content-box">
+            <% if (currentTab === 'overview') { %>
+                <!-- OVERVIEW DEFAULT WELCOME VIEW -->
+                <h3><i class="fa-solid fa-gauge-high" style="color: #0F9B58;"></i> Platform Analytics & Summary</h3>
+                <p style="color: #94A3B8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
+                    Welcome to the GlobalNexa Labs & NEED Super App control center. Use the sidebar to manage app customers, service partners, and view real-time website inquiries securely backed by Firebase Firestore.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <a href="/admin/dashboard?tab=customers" style="background: #1E293B; border: 1px solid #334155; padding: 1.5rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s;">
+                        <div>
+                            <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 4px;">Manage Customers</h4>
+                            <p style="color: #64748B; font-size: 0.85rem;">View all registered mobile app users</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right" style="color: #0F9B58; font-size: 1.1rem;"></i>
+                    </a>
+                    <a href="/admin/dashboard?tab=inquiries" style="background: #1E293B; border: 1px solid #334155; padding: 1.5rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.2s;">
+                        <div>
+                            <h4 style="color: #fff; font-size: 1.05rem; margin-bottom: 4px;">View Inquiries</h4>
+                            <p style="color: #64748B; font-size: 0.85rem;">Check website contact submissions</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-right" style="color: #0F9B58; font-size: 1.1rem;"></i>
+                    </a>
+                </div>
+
+            <% } else if (currentTab === 'customers') { %>
+                <!-- CUSTOMERS TAB VIEW -->
+                <h3><i class="fa-solid fa-users" style="color: #0F9B58;"></i> NEED App Customers (Firestore)</h3>
+
+                <% if (typeof customers !== 'undefined' && customers && customers.length > 0) { %>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Pincode</th>
+                                    <th>Status</th>
+                                    <th>Biometric</th>
+                                    <th>Registered Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% customers.forEach(item => { %>
+                                    <tr>
+                                        <td style="font-weight: 600; color: #fff;"><%= item.name %></td>
+                                        <td style="color: #0F9B58;"><%= item.phone %></td>
+                                        <td style="color: #CBD5E1;"><%= item.address %></td>
+                                        <td style="color: #94A3B8;"><%= item.pincode %></td>
+                                        <td>
+                                            <span style="background: rgba(15, 155, 88, 0.15); color: #0F9B58; padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;">
+                                                <%= item.status %>
+                                            </span>
+                                        </td>
+                                        <td style="color: #94A3B8;"><%= item.biometric_enabled ? 'Enabled' : 'Disabled' %></td>
+                                        <td style="color: #64748B; font-size: 0.8rem;">
+                                            <%= item.created_at ? new Date(item.created_at.toDate ? item.created_at.toDate() : item.created_at).toLocaleString() : 'N/A' %>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <div class="empty-text">
+                        <i class="fa-solid fa-users-slash" style="font-size: 2.5rem; margin-bottom: 1rem; display: block; color: #334155;"></i>
+                        No customers found in the Firestore 'customers' collection.
+                    </div>
+                <% } %>
+
+            <% } else if (currentTab === 'partners') { %>
+                <!-- SERVICE PARTNERS TAB VIEW -->
+                <h3><i class="fa-solid fa-handshake" style="color: #0F9B58;"></i> NEED App Service Partners</h3>
+
+                <% if (typeof partners !== 'undefined' && partners && partners.length > 0) { %>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Partner Name</th>
+                                    <th>Phone</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% partners.forEach(item => { %>
+                                    <tr>
+                                        <td style="font-weight: 600; color: #fff;"><%= item.name %></td>
+                                        <td style="color: #0F9B58;"><%= item.phone %></td>
+                                        <td style="color: #CBD5E1;"><%= item.category %></td>
+                                        <td><span style="color: #0F9B58;"><%= item.status %></span></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <div class="empty-text" style="padding: 4rem 2rem; text-align: center;">
+                        <div style="background: rgba(15, 155, 88, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                            <i class="fa-solid fa-handshake-angle" style="font-size: 2.2rem; color: #0F9B58;"></i>
+                        </div>
+                        <h4 style="color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">No Service Partners Found</h4>
+                        <p style="color: #64748B; font-size: 0.95rem; max-width: 400px; margin: 0 auto;">There are currently no service partners registered or synced in the Firestore database under the 'partners' collection.</p>
+                    </div>
+                <% } %>
+
+            <% } else if (currentTab === 'inquiries') { %>
+                <!-- INQUIRIES TAB VIEW -->
+                <h3><i class="fa-solid fa-inbox" style="color: #0F9B58;"></i> Website Contact Inquiries (Firestore)</h3>
+
+                <% if (typeof inquiries !== 'undefined' && inquiries && inquiries.length > 0) { %>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Message</th>
+                                    <th>Received Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% inquiries.forEach(item => { %>
+                                    <tr>
+                                        <td style="font-weight: 600; color: #fff;"><%= item.name %></td>
+                                        <td style="color: #0F9B58;"><%= item.email %></td>
+                                        <td style="color: #CBD5E1; max-width: 320px; word-break: break-word;"><%= item.message %></td>
+                                        <td style="color: #64748B; font-size: 0.8rem;">
+                                            <%= item.createdAt ? new Date(item.createdAt.toDate ? item.createdAt.toDate() : item.createdAt).toLocaleString() : 'Just now' %>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <div class="empty-text">
+                        <i class="fa-solid fa-database" style="font-size: 2.5rem; margin-bottom: 1rem; display: block; color: #334155;"></i>
+                        No inquiries recorded in Firestore yet. Submit a message from your website contact form to test!
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+
+</body>
+</html>
