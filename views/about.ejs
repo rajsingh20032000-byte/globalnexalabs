@@ -1,45 +1,50 @@
 <%- include('partials/header') %>
 
-  <!-- About Hero Section -->
-  <section class="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 blur-[140px] rounded-full pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-6">
-        <i data-lucide="info" class="w-3.5 h-3.5"></i> Who We Are
-      </div>
-      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.1]">
-        Pioneering the Future of <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">Digital Innovation</span>
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-normal">
-        GlobalNexa Labs is an elite technology studio focused on engineering robust web ecosystems, high-performance mobile apps, and scalable AI solutions.
-      </p>
-    </div>
-  </section>
+  <!-- Wrapper to push footer down if content is short -->
+  <div style="min-height: calc(100vh - 200px);">
 
-  <!-- Mission & Vision Section -->
-  <section class="py-20 border-t border-slate-900 bg-slate-900/40">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-10">
-        <div class="p-8 sm:p-10 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
-          <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-6">
-            <i data-lucide="target" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-2xl font-bold tracking-tight text-white mb-4">Our Mission</h3>
-          <p class="text-slate-400 text-base leading-relaxed">
-            To empower businesses worldwide with cutting-edge software engineering, seamless user experiences, and scalable cloud architectures that accelerate growth and digital transformation.
-          </p>
+    <!-- About Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 blur-[140px] rounded-full pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-6">
+          <i data-lucide="info" class="w-3.5 h-3.5"></i> Who We Are
         </div>
-        <div class="p-8 sm:p-10 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
-          <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-6">
-            <i data-lucide="eye" class="w-6 h-6"></i>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.1]">
+          Pioneering the Future of <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">Digital Innovation</span>
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-normal">
+          GlobalNexa Labs is an elite technology studio focused on engineering robust web ecosystems, high-performance mobile apps, and scalable AI solutions.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-20 border-t border-slate-900 bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="p-8 sm:p-10 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
+            <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-6">
+              <i data-lucide="target" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold tracking-tight text-white mb-4">Our Mission</h3>
+            <p class="text-slate-400 text-base leading-relaxed">
+              To empower businesses worldwide with cutting-edge software engineering, seamless user experiences, and scalable cloud architectures that accelerate growth and digital transformation.
+            </p>
           </div>
-          <h3 class="text-2xl font-bold tracking-tight text-white mb-4">Our Vision</h3>
-          <p class="text-slate-400 text-base leading-relaxed">
-            To be a globally recognized technology laboratory known for engineering excellence, rigorous code quality, and building next-gen solutions that shape tomorrow's digital landscape.
-          </p>
+          <div class="p-8 sm:p-10 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl">
+            <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-6">
+              <i data-lucide="eye" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold tracking-tight text-white mb-4">Our Vision</h3>
+            <p class="text-slate-400 text-base leading-relaxed">
+              To be a globally recognized technology laboratory known for engineering excellence, rigorous code quality, and building next-gen solutions that shape tomorrow's digital landscape.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </div>
 
 <%- include('partials/footer') %>
