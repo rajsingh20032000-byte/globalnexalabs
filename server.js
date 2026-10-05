@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Set EJS as view engine
+// Set EJS as view engine with absolute path resolution
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -14,9 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('index', { 
-    title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
-  });
+  try {
+    res.render('index', { 
+      title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
+    });
+  } catch (err) {
+    console.error("View rendering error:", err);
+    res.status(500).send("Internal Server Error: " + err.message);
+  }
 });
 
 app.post('/contact', (req, res) => {
