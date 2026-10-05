@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Set EJS view engine and absolute path
+// Set EJS view engine and absolute views path for Hostinger
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -16,6 +16,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.render('index', { 
     title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
+  });
+});
+
+// About Us Page Route
+app.get('/about', (req, res) => {
+  res.render('about', { 
+    title: 'About Us | GlobalNexa Labs' 
   });
 });
 
