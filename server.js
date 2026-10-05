@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Set EJS as view engine with absolute path resolution
+// Set EJS as view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
       title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
     });
   } catch (err) {
-    console.error("View rendering error:", err);
-    res.status(500).send("Internal Server Error: " + err.message);
+    console.error("Render Error:", err);
+    res.status(500).send(`<h3>Template Rendering Error:</h3><pre>${err.stack}</pre>`);
   }
 });
 
