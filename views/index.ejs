@@ -1,86 +1,60 @@
 <%- include('partials/header') %>
 
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 blur-[140px] rounded-full pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-6">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Next-Gen Software & Ecosystems
-      </div>
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.1]">
-        Building Intelligent <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">Digital Solutions</span> for Tomorrow
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-normal">
-        At GlobalNexa Labs, we architect high-performance web apps, secure mobile experiences, and advanced platforms that scale globally.
-      </p>
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-base bg-brand-500 hover:bg-brand-600 text-white transition shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2">
-          Start Your Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="py-20 border-t border-slate-900 bg-slate-900/40">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold tracking-tight mb-4">Our Core Expertise</h2>
-      <p class="text-slate-400 max-w-xl mx-auto mb-12 text-sm">Engineering robust digital solutions tailored to modern business requirements.</p>
-      <div class="grid md:grid-cols-3 gap-8 text-left">
-        <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800">
-          <div class="w-10 h-10 rounded-xl bg-brand-500/15 flex items-center justify-center text-brand-400 mb-4">
-            <i data-lucide="globe" class="w-5 h-5"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Web Ecosystems</h3>
-          <p class="text-slate-400 text-sm">High-performance web applications built with modern stacks, secure APIs, and responsive UI frameworks.</p>
-        </div>
-        <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800">
-          <div class="w-10 h-10 rounded-xl bg-brand-500/15 flex items-center justify-center text-brand-400 mb-4">
-            <i data-lucide="smartphone" class="w-5 h-5"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">Mobile Solutions</h3>
-          <p class="text-slate-400 text-sm">Cross-platform mobile apps engineered for speed, offline capability, and seamless native integration.</p>
-        </div>
-        <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800">
-          <div class="w-10 h-10 rounded-xl bg-brand-500/15 flex items-center justify-center text-brand-400 mb-4">
-            <i data-lucide="cpu" class="w-5 h-5"></i>
-          </div>
-          <h3 class="text-lg font-bold text-white mb-2">AI & Automation</h3>
-          <p class="text-slate-400 text-sm">Smart data processing utilities, automated transcription workflows, and scalable backend platforms.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 relative">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="p-8 sm:p-12 rounded-3xl bg-slate-900 border border-slate-800 relative shadow-2xl">
-        <div class="text-center max-w-xl mx-auto mb-10">
-          <h2 class="text-3xl font-bold tracking-tight">Let's Build Together</h2>
-          <p class="text-slate-400 mt-2 text-sm">Drop your project inquiry and our team will get back to you.</p>
-        </div>
-        <form action="/contact" method="POST" class="space-y-4">
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Your Name</label>
-              <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-brand-500">
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">🚀 Powered by GlobalNexa Labs</div>
+            <h1>Building Next-Gen Digital Ecosystems</h1>
+            <div class="tagline">
+                where <span class="problems">PROBLEMS</span> meet <span class="solutions">SOLUTIONS</span>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
-              <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-brand-500">
+            <p>We are a forward-thinking technology laboratory engineering intelligent digital platforms, high-performance Super Apps, and seamless user experiences.</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn">Explore Products</a>
+                <a href="/about" class="btn-outline">About Us</a>
             </div>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Message</label>
-            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-brand-500"></textarea>
-          </div>
-          <button type="submit" class="w-full py-4 rounded-xl font-semibold text-sm bg-brand-500 hover:bg-brand-600 text-white transition shadow-lg shadow-brand-500/25">
-            Send Inquiry
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
+
+            <!-- Featured Product Showcase -->
+            <div class="app-showcase" id="products">
+                <div class="app-info">
+                    <h3>NEED Super App</h3>
+                    <p>Our flagship platform designed to bridge the gap between customers and trusted local service providers with unmatched speed and reliability.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> Advanced Local Service Discovery</li>
+                        <li><i class="fa-solid fa-check"></i> Seamless Customer & Partner Portals</li>
+                        <li><i class="fa-solid fa-check"></i> AES-256 Secure Data Protection</li>
+                    </ul>
+                    <a href="#" class="btn" style="display: inline-block;">Download App v1.0.0</a>
+                </div>
+                <div class="app-mockup">
+                    <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 5px;">NEED</div>
+                    <p style="font-style: italic; font-size: 0.9rem; margin-bottom: 2rem;">where PROBLEMS meet SOLUTIONS</p>
+                    <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; font-size: 0.9rem; font-weight: 600;">
+                        <i class="fa-solid fa-shield-halved"></i> Enterprise Grade Security
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-title">Why GlobalNexa Labs?</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <h4>Innovative Architecture</h4>
+                <p>Building robust, scalable applications utilizing cutting-edge frontend and backend technologies.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h4>High Performance</h4>
+                <p>Optimized speed, lightning-fast response times, and lightweight modern design principles.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fa-solid fa-lock"></i></div>
+                <h4>Uncompromised Security</h4>
+                <p>Advanced data encryption and rigorous protection standards to secure user privacy completely.</p>
+            </div>
+        </div>
+    </section>
 
 <%- include('partials/footer') %>
