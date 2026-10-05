@@ -1,125 +1,22 @@
 const express = require('express');
+const path = require('path');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Set EJS view engine and absolute path
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Main Route with Embedded HTML (Reliable & Zero-Dependency)
+// Routes
 app.get('/', (req, res) => {
-  res.send(`
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#e6f4ec',
-              500: '#0F9B58',
-              600: '#005C29',
-              900: '#003318',
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>body { font-family: 'Inter', sans-serif; }</style>
-</head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
-
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
-          <i data-lucide="cpu" class="w-5 h-5 text-white"></i>
-        </div>
-        <span class="text-xl font-extrabold tracking-tight text-white">
-          GlobalNexa <span class="text-brand-500">Labs</span>
-        </span>
-      </div>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#services" class="hover:text-brand-400 transition">Services</a>
-        <a href="#contact" class="hover:text-brand-400 transition">Contact</a>
-      </nav>
-      <div>
-        <a href="#contact" class="px-5 py-2.5 rounded-xl font-semibold text-sm bg-brand-500 hover:bg-brand-600 text-white transition shadow-lg shadow-brand-500/25">
-          Get Started
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/10 blur-[140px] rounded-full pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-6">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Next-Gen Software & Ecosystems
-      </div>
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.1]">
-        Building Intelligent <span class="bg-gradient-to-r from-brand-400 to-emerald-300 bg-clip-text text-transparent">Digital Solutions</span> for Tomorrow
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-normal">
-        At GlobalNexa Labs, we architect high-performance web apps, secure mobile experiences, and advanced platforms that scale globally.
-      </p>
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-base bg-brand-500 hover:bg-brand-600 text-white transition shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2">
-          Start Your Project <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-24 relative">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="p-8 sm:p-12 rounded-3xl bg-slate-900 border border-slate-800 relative shadow-2xl">
-        <div class="text-center max-w-xl mx-auto mb-10">
-          <h2 class="text-3xl font-bold tracking-tight">Let's Build Together</h2>
-          <p class="text-slate-400 mt-2 text-sm">Drop your project inquiry and our team will get back to you.</p>
-        </div>
-        <form action="/contact" method="POST" class="space-y-4">
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Your Name</label>
-              <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-brand-500">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
-              <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-brand-500">
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Message</label>
-            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-brand-500"></textarea>
-          </div>
-          <button type="submit" class="w-full py-4 rounded-xl font-semibold text-sm bg-brand-500 hover:bg-brand-600 text-white transition shadow-lg shadow-brand-500/25">
-            Send Inquiry
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <footer class="border-t border-slate-900 py-12 bg-slate-950 text-center text-sm text-slate-500">
-    &copy; 2026 GlobalNexa Labs. All rights reserved.
-  </footer>
-
-  <script>lucide.createIcons();</script>
-</body>
-</html>
-  `);
+  res.render('index', { 
+    title: 'GlobalNexa Labs | Next-Gen Software, AI & Mobile Solutions' 
+  });
 });
 
 app.post('/contact', (req, res) => {
